@@ -9,7 +9,7 @@ router.post('/', function(req, res) {
   material = req.body.material;
   technology = req.body.technology;
   fileurl = req.body.fileurl;
-  quantity = req.body.quantity;
+  quantity = parseInt(req.body.quantity);
   remarks = req.body.remarks;
 
   var query =
@@ -21,10 +21,17 @@ router.post('/', function(req, res) {
     + "'" + fileurl + "'" + ", "
     + "'" + quantity + "'" + ", "
     + "'" + remarks + "'" + ")";
-  db.query(query, function (err, result) {
-      if (err) throw err;
-  })
-  res.send("successfully submitted form");
+  try {
+    db.query(query, function (err, result) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).send('Success');
+      }
+    })
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;
