@@ -9,6 +9,7 @@ const mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var dropFileRouter = require('./routes/dropFile');
+var dotenv = require('dotenv').config();
 var app = express();
 
 // view engine setup
@@ -33,10 +34,10 @@ app.use(function(req, res, next) {
 });
 
 const db = mysql.createConnection ({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'factorem'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_BASE
 });
 
 db.connect((err) => {
