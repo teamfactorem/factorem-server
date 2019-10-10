@@ -13,7 +13,7 @@ router.post('/', function(req, res) {
   remarks = req.body.remarks;
 
   var query =
-    "INSERT INTO forms (name, email, material, technology, fileurl, quantity, remarks) VALUES ("
+    "INSERT INTO Orders (name, email, material, technology, fileurl, quantity, remarks) VALUES ("
     + "'" + name + "'" + ", "
     + "'" + email + "'" + ", "
     + "'" + material + "'" + ", "
