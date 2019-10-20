@@ -22,15 +22,19 @@ router.post('/', function(req, res) {
     + "'" + quantity + "'" + ", "
     + "'" + remarks + "'" + ")";
   try {
-    db.query(query, function (err, result) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.status(200).send('Success');
-      }
-    })
+    if (!name || !email || !quantity) {
+      res.status(400).send("Please try again.");
+    } else {
+      db.query(query, function (err, result) {
+        if (err) {
+          res.status(400).send("Please try again.");
+        } else {
+          res.status(200).send('Success');
+        }
+      })
+    }
   } catch (err) {
-    console.log(err);
+    res.status(400).send("Please try again.");
   }
 });
 
