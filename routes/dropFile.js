@@ -29,6 +29,10 @@ router.post('/', function(req, res) {
         if (err) {
           res.status(400).send("Please try again.");
         } else {
+          const Telegraf = require('telegraf');
+          const bot = new Telegraf(process.env.BOT_TOKEN);
+          bot.startPolling();
+          bot.telegram.sendMessage(process.env.CHAT_ID, 'A file has been uploaded by ' + name + '. Check the database!!').catch(console.error);
           res.status(200).send('Success');
         }
       })

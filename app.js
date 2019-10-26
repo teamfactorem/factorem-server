@@ -6,7 +6,6 @@ var logger = require('morgan');
 var cors = require("cors");
 var bodyParser = require('body-parser');
 const mysql = require('mysql');
-
 var indexRouter = require('./routes/index');
 var dropFileRouter = require('./routes/dropFile');
 var dotenv = require('dotenv').config();
@@ -32,6 +31,13 @@ app.use('/dropFile', dropFileRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+// run telegram bot
+// const Telegraf = require('telegraf');
+// const bot = new Telegraf(process.env.BOT_TOKEN);
+// bot.startPolling();
+// bot.telegram.sendMessage(process.env.CHAT_ID, 'hello world from bit4you.io').catch(console.error);
+// console.log('Telegram bot started.')
 
 const db = mysql.createConnection ({
   host: process.env.DB_HOST,
