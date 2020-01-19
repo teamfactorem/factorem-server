@@ -3,7 +3,7 @@ var router = express.Router();
 router.use(express.urlencoded());
 
 router.post('/', function(req, res) {
-  let name, email, material, technology, fileurl, quantity, remarks;
+  let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery;
   name = req.body.name;
   email = req.body.email;
   material = req.body.material;
@@ -11,16 +11,29 @@ router.post('/', function(req, res) {
   fileurl = req.body.fileurl;
   quantity = parseInt(req.body.quantity);
   remarks = req.body.remarks;
+  finishing = req.body.finishing;
+  tolerance = req.body.tolerance;
+  company = req.body.company;
+  expectedPrice = req.body.expectedPrice;
+  delivery = req.body.delivery;
+  expectedDelivery = req.body.expectedDelivery;
 
   var query =
-    "INSERT INTO Orders (name, email, material, technology, fileurl, quantity, remarks) VALUES ("
+    "INSERT INTO Orders (name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery) VALUES ("
     + "'" + name + "'" + ", "
     + "'" + email + "'" + ", "
     + "'" + material + "'" + ", "
     + "'" + technology + "'" + ", "
     + "'" + fileurl + "'" + ", "
     + "'" + quantity + "'" + ", "
-    + "'" + remarks + "'" + ")";
+    + "'" + remarks + "'" + ", "
+    + "'" + finishing + "'" + ", "
+    + "'" + tolerance + "'" + ", "
+    + "'" + company + "'" + ", "
+    + "'" + expectedPrice + "'" + ", "
+    + "'" + delivery + "'" + ", "
+    + "'" + expectedDelivery + "'" + ")"
+  ;
   try {
     if (!name || !email || !quantity) {
       res.status(400).send("Please try again.");
@@ -29,10 +42,10 @@ router.post('/', function(req, res) {
         if (err) {
           res.status(400).send("Please try again.");
         } else {
-          const Telegraf = require('telegraf');
-          const bot = new Telegraf(process.env.BOT_TOKEN);
-          bot.startPolling();
-          bot.telegram.sendMessage(process.env.CHAT_ID, 'A file has been uploaded by ' + name + '. Check the database!!').catch(console.error);
+          // const Telegraf = require('telegraf');
+          // const bot = new Telegraf(process.env.BOT_TOKEN);
+          // bot.startPolling();
+          // bot.telegram.sendMessage(process.env.CHAT_ID, 'A file has been uploaded by ' + name + '. Check the database!!').catch(console.error);
           res.status(200).send('Success');
         }
       })
