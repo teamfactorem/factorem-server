@@ -3,7 +3,7 @@ var router = express.Router();
 router.use(express.urlencoded());
 
 router.post('/', function(req, res) {
-  let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery;
+  let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery, application;
   name = req.body.name;
   email = req.body.email;
   material = req.body.material;
@@ -17,9 +17,10 @@ router.post('/', function(req, res) {
   expectedPrice = req.body.expectedPrice;
   delivery = req.body.delivery;
   expectedDelivery = req.body.expectedDelivery;
+  application = req.body.application;
 
   var query =
-    "INSERT INTO Orders (name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery) VALUES ("
+    "INSERT INTO Orders (name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery, application) VALUES ("
     + "'" + name + "'" + ", "
     + "'" + email + "'" + ", "
     + "'" + material + "'" + ", "
@@ -32,7 +33,8 @@ router.post('/', function(req, res) {
     + "'" + company + "'" + ", "
     + "'" + expectedPrice + "'" + ", "
     + "'" + delivery + "'" + ", "
-    + "'" + expectedDelivery + "'" + ")"
+    + "'" + expectedDelivery + "'" + ","
+    + "'" + application + "'" + ")"
   ;
   try {
     if (!name || !email || !quantity) {
