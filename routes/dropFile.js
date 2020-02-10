@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-router.use(express.urlencoded());
+router.use(express.urlencoded({ extended: true}));
 
 router.post('/', function(req, res) {
   let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery, application;
