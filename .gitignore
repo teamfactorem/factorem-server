@@ -4,3 +4,5 @@
 .env
 .env.development
 some.log
+selfsigned.key
+selfsigned.crt
