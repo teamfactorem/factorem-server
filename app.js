@@ -30,12 +30,6 @@ app.use(function(req, res, next) {
   next();
 });
 app.use("/dropFile", dropFileRouter);
-app.post("/test", function(req, res) {
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  return res.json({
-    success: true
-  });
-})
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
