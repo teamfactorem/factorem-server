@@ -3,6 +3,7 @@ var router = express.Router();
 router.use(express.urlencoded({ extended: true}));
 
 router.use('/', function(req, res) {
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery, application;
   name = req.body.name;
   email = req.body.email;
