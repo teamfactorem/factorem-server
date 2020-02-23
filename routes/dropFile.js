@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 router.use(express.urlencoded({ extended: true}));
 
-router.post('/', function(req, res) {
+router.use('/', function(req, res) {
   let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery, application;
   name = req.body.name;
   email = req.body.email;
