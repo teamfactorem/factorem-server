@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 router.use(express.urlencoded({ extended: true}));
 
-router.use('/', function(req, res) {
+router.post('/', function(req, res) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   let name, email, material, technology, fileurl, quantity, remarks, finishing, tolerance, company, expectedPrice, delivery, expectedDelivery, application;
   name = req.body.name;
@@ -39,22 +39,34 @@ router.use('/', function(req, res) {
   ;
   try {
     if (!name || !email || !quantity) {
-      res.status(400).send("Please try again.");
+      return res.json({
+        success: false,
+        message: "Please try again"
+      })
     } else {
       db.query(query, function (err, result) {
         if (err) {
-          res.status(400).send("Please try again.");
+          return res.json({
+            success: false,
+            message: "Please try again"
+          })
         } else {
           // const Telegraf = require('telegraf');
           // const bot = new Telegraf(process.env.BOT_TOKEN);
           // bot.startPolling();
           // bot.telegram.sendMessage(process.env.CHAT_ID, 'A file has been uploaded by ' + name + '. Check the database!!').catch(console.error);
-          res.status(200).send('Success');
+          return res.json({
+            success: true,
+            message: "worked"
+          })
         }
       })
     }
   } catch (err) {
-    res.status(400).send("Please try again.");
+    return res.json({
+      success: false,
+      message: "Please try again"
+    })
   }
 });
 
